@@ -1,0 +1,20 @@
+# ===== 本地产物，不要提交 =====
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 上游运行产物：可能含本机路径、GME 日志片段、配置摘要
+data/
+backups/
+
+# 界面截图（含本机路径与窗口标题）
+screenshots/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+desktop.ini

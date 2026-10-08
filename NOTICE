@@ -1,0 +1,114 @@
+NOTICE — 归属与许可声明
+========================
+
+本仓库包含第三方代码，并在此基础上添加了图形界面、部署脚本与中文文档。
+以下按来源分列，请在使用、分发或二次开发前完整阅读。
+
+
+一、上游项目（核心逻辑，未做修改）
+----------------------------------
+
+  项目名称 : MiliastraGME
+  作者     : clearyss
+  仓库地址 : https://github.com/clearyss/MiliastraGME
+  许可证   : GNU General Public License v3.0（见仓库根目录 LICENSE）
+  交流群   : QQ 111399948（上游作者维护）
+
+  本仓库包含以下**原样保留、未做任何修改**的上游文件：
+
+    __init__.py        __main__.py        audio_params.py    common.py
+    console.py         constants.py       gme_config.py      hosts.py
+    paths.py           status.py          audio_params.json  settings.json
+    LICENSE            docs/UPSTREAM-README.md
+
+  `docs/UPSTREAM-README.md` 是上游 README 的原始副本。原样保留的原因是：
+
+    1. GPL-3.0 要求随代码保留版权与许可声明；
+    2. 上游 README 顶部的免责声明与使用限制属于必须随代码分发的内容。
+
+  **上游 README 中的免责声明、使用限制、交流方式等信息，其权利与解释权归上游作者。**
+  本项目的文档与教程不替代、不修改、也不放宽上游的这些条款。
+
+  上游代码的著作权归 clearyss 所有。上游作者**未曾**审阅、认可或授权本项目。
+
+
+二、本项目新增部分
+------------------
+
+  内容范围 :
+
+    gui/                  图形界面（PySide6）
+    TUTORIAL.md           中文使用教程
+    README.md             项目说明
+    NOTICE                本文件
+    install.cmd           安装脚本
+    run-gui.cmd           启动器（普通权限）
+    run-gui-admin.cmd     启动器（管理员权限）
+    体检.ps1 / gui/health_check.ps1    只读体检包装
+    make_shortcuts.ps1    桌面快捷方式生成
+    .gitignore
+
+  对上游代码的修改 : **无**。
+
+    上游目录名带连字符（`miliastra-gme`）无法作为 Python 包直接 import，
+    因此 `gui/core.py` 使用 `importlib.util.spec_from_file_location()`
+    指定 `submodule_search_locations`，以合法包名（`gme_core`）加载上游模块。
+    这是**加载方式的适配**，不涉及对上游源码的改动。
+
+  许可证 : GNU General Public License v3.0
+
+    因本仓库整体包含并分发上游 GPL-3.0 代码，本项目新增部分同样以 GPL-3.0 授权。
+    完整条款见仓库根目录 LICENSE。
+    SPDX-License-Identifier: GPL-3.0
+
+
+三、第三方依赖
+--------------
+
+  PySide6 (Qt for Python)
+    https://www.qt.io/qt-for-python
+    许可证 : LGPL-3.0 / GPL-3.0 / 商业许可（三选一）
+    说明   : 本项目以**运行期依赖**方式使用，通过 pip 安装，未修改、未静态链接、未再分发。
+             分发本仓库时**不包含** PySide6 二进制。
+
+  VB-Audio Virtual Cable（可选，用户自行安装）
+    https://vb-audio.com/Cable/
+    说明   : 音频路由场景使用。本项目不包含、不再分发其驱动或程序。
+             `gui/stutter_diagnose.py` 仅读取用户本机已安装的 OBS 配置文件进行只读诊断。
+
+  GNU General Public License v3.0
+    https://www.gnu.org/licenses/gpl-3.0.html
+    说明   : 仓库根目录 LICENSE 即此许可证全文（来自上游，未修改）。
+
+
+四、图形资源
+------------
+
+  gui/assets/icon.svg    原始图标（矢量）
+  gui/assets/icon.ico    由 gui/make_icon.py 从零生成的位图图标（9 个尺寸，16–256 px）
+
+  图标为本项目原创，使用 zlib 手写 PNG 编码后按 ICO 容器格式打包，**不含任何第三方素材**。
+  生成脚本可复现，无外部依赖。
+
+  上游仓库中的 socialify 徽章、shields.io 徽章等外链图片属于各自服务方，未包含在本仓库中。
+
+
+五、免责声明
+------------
+
+  本项目与米哈游（miHoYo / HoYoverse）、腾讯（Tencent / GME）**均无关联**，
+  不代表、不隶属于、未获其授权或认可。
+
+  本项目会修改系统 hosts、GME 配置目录与游戏安装目录文件，
+  其中「屏蔽 GME 远程配置域名」属于对抗云端配置下发的行为。
+
+  使用者应自行确认：
+
+    - 已阅读并理解上游 README 中的完整免责声明；
+    - 使用方式符合所在地法律法规与游戏用户协议；
+    - 已备份原始文件，并能接受可能出现的后果
+      （语音功能异常、配置无法更新、安全软件拦截、账号风险提示或限制等）。
+
+  本项目作者与上游作者均不对使用后果承担责任。
+  若本项目说明、功能或使用方式与法律法规或游戏官方规则存在冲突，
+  **应以法律法规和米哈游官方规则为准，并立即停止使用、执行 restore 并回滚相关配置。**
